@@ -35,11 +35,11 @@ public class BrowserFactory {
 
     public static WebDriver getBrowser(String browserName) {
 
-        if(browserName.equalsIgnoreCase("chrome")){
+        if (browserName.equalsIgnoreCase("chrome")) {
             setSystemPathForDrivers()
             return new ChromeDriver()
 
-        } else if(browserName.equalsIgnoreCase("firefox")) {
+        } else if (browserName.equalsIgnoreCase("firefox")) {
             return new FirefoxDriver()
 
         } else {

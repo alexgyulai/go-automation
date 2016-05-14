@@ -15,7 +15,8 @@ public abstract class BaseTest {
 
     @Parameters("browser")
     @BeforeClass(alwaysRun = true)
-    public static void setUpBrowser (@Optional("chrome") String browser) {
+    public static void setUpBrowser(@Optional("chrome") String browser) {
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.Jdk14Logger")
         setDriver(browser)
         getDriver().manage().window().setSize(new Dimension(1600, 1200))
         getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS)

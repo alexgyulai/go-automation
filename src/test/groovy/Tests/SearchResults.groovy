@@ -4,6 +4,7 @@ import Pages.HomePage
 import Pages.SearchResultsPage
 import org.testng.annotations.BeforeMethod
 import org.testng.annotations.Test
+import ru.yandex.qatools.allure.annotations.Title
 
 
 public class SearchResults extends BaseTest {
@@ -20,19 +21,19 @@ public class SearchResults extends BaseTest {
     }
 
 
-
+    @Title("Search results are sorted by Price in Trains channel ")
     @Test
     public void searchTrip() {
         homePage
-            .selectRoundTrip()
-            .enterDepartureLocation("Berlin, Deutschland")
-            .enterArrivalLocation("Prag, Tschechien")
-            .selectAdultsQuantity("2")
-            .disableAccommodationSearch()
-            .performSearch()
+                .selectRoundTrip()
+                .enterDepartureLocation("Berlin, Deutschland")
+                .enterArrivalLocation("Prag, Tschechien")
+                .addAdultsQuantity()
+                .disableAccommodationSearch()
+                .performSearch()
         searchResults
-            .selectChannel("TRAINS")
-            .verifyResultsSortedByPrice()
+                .selectChannel("TRAINS")
+                .verifyResultsSortedByPrice()
     }
 
 }

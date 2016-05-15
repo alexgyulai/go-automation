@@ -16,10 +16,12 @@
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
-                        <goals><goal>add-source</goal></goals>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
                         <configuration>
                             <sources>
-                                <source>src/main/</source>
+                                <source>src/</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -52,12 +54,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
-                <!--<configuration>-->
-                    <!--<testFailureIgnore>true</testFailureIgnore>-->
-                    <!--<argLine>-->
-                         <!-- -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"-->
-                    <!--</argLine>-->
-                <!--</configuration>-->
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteFile}</suiteXmlFile>
+                        <!--<suiteXmlFile>src/main/resources/phantom.xml</suiteXmlFile>-->
+                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
@@ -68,6 +74,7 @@
             </plugin>
         </plugins>
     </build>
+
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -78,6 +85,7 @@
             </plugin>
         </plugins>
     </reporting>
+
     <properties>
         <allure.version>1.4.23</allure.version>
         <aspectj.version>1.8.5</aspectj.version>
@@ -124,6 +132,18 @@
                     <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--Logger-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.5</version>
         </dependency>
 
         <dependency>

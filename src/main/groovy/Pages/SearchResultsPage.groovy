@@ -2,6 +2,7 @@ package Pages
 
 import Components.Helpers
 import org.openqa.selenium.By
+import ru.yandex.qatools.allure.annotations.Step
 
 import static Components.WebDriverHandler.*
 
@@ -33,10 +34,11 @@ public class SearchResultsPage {
         return this
     }
 
+    @Step("Verify results are sorted by Price ascending")
     def verifyResultsSortedByPrice() {
         def prices = []
         driver.findElements(By.cssSelector(TRAIN_PRICES)) each {
-            prices << it.getText().replaceAll("[^0-9.]", "").toBigDecimal() //Getting prices and removing everything but numbers
+            prices << it.getText().replaceAll("[^0-9.]", "").toBigDecimal()  //Getting prices and removing everything but numbers
         }
         def prices_sorted = prices.sort(false) //Sorting without mutating original
 

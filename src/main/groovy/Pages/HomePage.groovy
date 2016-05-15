@@ -1,6 +1,8 @@
 package Pages
 
 import Components.Helpers
+import org.openqa.selenium.Keys
+import org.openqa.selenium.interactions.Actions
 
 import static Components.WebDriverHandler.*
 
@@ -15,7 +17,7 @@ public class HomePage {
     private static final String DEPARTURE_LOCATION = "#from_filter"
     private static final String ARRIVAL_LOCATION = "#to_filter"
     private static final String PERSON_SELECTION = "#person-counter"
-    private static final String ADULTS_COUNT_FIELD = "#nbadults"
+    private static final String INCREASE_ADULTS_COUNT = "#number-of-adults-spinner-next"
     private static final String SEARCH_BUTTON = "#search-form__submit-btn"
     private static final String ACCOMMODATION_CHECKBOX = ".checkboxv2"
 
@@ -35,29 +37,33 @@ public class HomePage {
     }
 
     def enterDepartureLocation(String location) {
-        helpers.clearField(DEPARTURE_LOCATION)
-        helpers.fillInFieldWith(DEPARTURE_LOCATION, location)
+        helpers
+                .clearField(DEPARTURE_LOCATION)
+                .fillInFieldWith(DEPARTURE_LOCATION, location)
+                .sendKey("escape")
         return this
     }
 
     def enterArrivalLocation(String location) {
-        helpers.clearField(ARRIVAL_LOCATION)
-        helpers.fillInFieldWith(ARRIVAL_LOCATION, location)
+        helpers
+                .clearField(ARRIVAL_LOCATION)
+                .fillInFieldWith(ARRIVAL_LOCATION, location)
+                .sendKey("escape")
         return this
     }
 
-    def selectAdultsQuantity(String count) {
+    def addAdultsQuantity() {
         helpers
                 .clickElement(PERSON_SELECTION)
-                .clearField(ADULTS_COUNT_FIELD)
-                .fillInFieldWith(ADULTS_COUNT_FIELD, count)
+                .clickElement(INCREASE_ADULTS_COUNT)
                 .sendKey("escape")
         return this
     }
 
     def disableAccommodationSearch() {
-        helpers.waitUntillElementVisible(ACCOMMODATION_CHECKBOX)
-        helpers.clickElement(ACCOMMODATION_CHECKBOX)
+        helpers
+                .waitUntillElementVisible(ACCOMMODATION_CHECKBOX)
+                .clickElement(ACCOMMODATION_CHECKBOX)
         return this
     }
 

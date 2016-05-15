@@ -1,5 +1,7 @@
 package Components
 
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -9,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver
  */
 public class BrowserFactory {
 
+    private static Logger log = LogManager.getLogger(BrowserFactory)
+
 
     private static void setSystemPathForDrivers() {
         String path = "./src/main/resources/drivers/";
@@ -16,15 +20,15 @@ public class BrowserFactory {
 
         if (osName.toLowerCase().contains("mac")) {
             System.setProperty("webdriver.chrome.driver", path + "mac/chromedriver")
-            print("this is MAC")
+            log.info("Starting session on {}", osName)
 
         } else if (osName.toLowerCase().contains("linux")) {
             System.setProperty("webdriver.chrome.driver", path + "linux/chromedriver")
-            print("this is Linux")
+            log.info("Starting session on {}", osName)
 
         } else if (osName.toLowerCase().contains("windows")) {
             System.setProperty("webdriver.chrome.driver", path + "win/chromedriver.exe")
-            print("this is Linux")
+            log.info("Starting session on {}", osName)
 
         } else {
             print("OS is not defined")
